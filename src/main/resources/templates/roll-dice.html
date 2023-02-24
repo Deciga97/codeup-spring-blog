@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>High Rollers</title>
+</head>
+<body>
+<!-- Prompting user to pick a number 1-6. -->
+<h1>Guess A Number Between 1 And 6!</h1>
+<!-- Iteration created with numbers.sequence to generate numbers 1-6. -->
+<div th:each="i : ${#numbers.sequence(1,6)}">
+<!--    Creates a link for every number thats being interated through for each method. -->
+  <a th:href="@{/roll-dice/{guess}(guess=${i})}" th:text="${i}"></a>
+  <br>
+</div>
+
+</body>
+</html>

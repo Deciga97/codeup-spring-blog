@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Dice Result</title>
+</head>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div th:replace="header :: header"></div>
+
+
+
+<h1>Result</h1>
+<!-- Guess is being displayed from Controller -->
+<p>You Guessed: <span th:text="${guess}"></span></p>
+<!-- Roll is also being displayed from Controller  -->
+<p>The Roll Was <span th:text="${roll}"></span></p>
+<!--Messaged being displayed based off of roll and guess from controller.-->
+<p th:text="${message}"></p>
+<!--Re Directs user to roll-dice page to play again.-->
+<a th:href="@{/roll-dice}">Roll Again?</a>
+
+<div th:replace="footer :: footer"></div>
+
+
+</body>
+</html>
