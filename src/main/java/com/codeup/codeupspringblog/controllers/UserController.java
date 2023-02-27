@@ -1,8 +1,7 @@
-package com.codeup.codeupspringblog;
+package com.codeup.codeupspringblog.controllers;
 
-import com.codeup.iconspringblog.models.User;
-import com.codeup.iconspringblog.services.UserDaoService;
-import org.apache.catalina.User;
+import com.codeup.codeupspringblog.models.User;
+import com.codeup.codeupspringblog.services.UserDaoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

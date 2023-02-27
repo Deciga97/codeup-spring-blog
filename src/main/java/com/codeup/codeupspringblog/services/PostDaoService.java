@@ -1,8 +1,8 @@
 package com.codeup.codeupspringblog.services;
 
-import com.codeup.iconspringblog.models.Post;
-import com.codeup.iconspringblog.repositories.PostRepository;
-import com.codeup.iconspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

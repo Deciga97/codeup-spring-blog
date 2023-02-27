@@ -1,41 +1,88 @@
 package com.codeup.codeupspringblog.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.codeup.codeupspringblog.Ad;
+import jakarta.persistence.*;
 
-import java.util.Collection;
+import java.util.List;
 
-public class UserWithRoles extends User implements UserDetails {
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable = false, length = 50, unique = true)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> posts;
 
-    public UserWithRoles(User user) {
-        super(user);  // Call the copy constructor defined in User
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Ad> ads;
+
+    public User() {};
+
+    public User(User copy) {
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public List<Ad> getAds() {
+        return ads;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public void setAds(List<Ad> ads) {
+        this.ads = ads;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public long getId() {
+        return id;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

@@ -3,9 +3,6 @@ package com.codeup.codeupspringblog.models;
 import com.codeup.codeupspringblog.Ad;
 import jakarta.persistence.*;
 
-public class AdImage {
-import jakarta.persistence.*;
-
     @Entity
     @Table(name = "ad_images")
     public class AdImage {

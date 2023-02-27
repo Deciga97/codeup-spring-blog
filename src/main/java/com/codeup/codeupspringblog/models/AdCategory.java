@@ -1,4 +1,4 @@
-package com.codeup.codeupspringblog.models.
+package com.codeup.codeupspringblog.models;
 
 import com.codeup.codeupspringblog.Ad;
 import jakarta.persistence.*;

@@ -1,30 +1,27 @@
 package com.codeup.codeupspringblog.services;
 
-import com.codeup.codeupspringblog.models.UserWithRoles;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.UserRepository;
-import com.codeup.iconspringblog.models.User;
-import com.codeup.iconspringblog.models.UserWithRoles;
-import com.codeup.iconspringblog.repositories.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsLoader implements UserDetailsService {
-    private final UserRepository users;
+public class UserDaoService {
 
-    public UserDetailsLoader(UserRepository users) {
-        this.users = users;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserDaoService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("No user found for " + username);
-        }
-
-        return new UserWithRoles(user);
+    public void registerUser(User user) {
+        // hash the original plain text password
+        String hash = passwordEncoder.encode(user.getPassword());
+        // set the hashed password to the user password property
+        user.setPassword(hash);
+        // save the user with the hashed password field
+        userRepository.save(user);
     }
 }
